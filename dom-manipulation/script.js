@@ -3,7 +3,7 @@ let quotes = [
   { text: "Life is what happens when you're busy making other plans.", category: "life" },
   { text: "Do what you can, with what you have, where you are.", category: "inspiration" }
 ];
-function showRandomQuote() {
+function displayRandomQuote() {
     const randomIndex = Math.floor(Math.random() * quotes.length);
     const selectedQuote = quotes[randomIndex];
 
@@ -12,7 +12,7 @@ function showRandomQuote() {
     display.textContent = `"${selectedQuote.text}" — ${selectedQuote.category}`;
 }
 
-document.getElementById('newQuote').addEventListener('click', showRandomQuote);
+document.getElementById('newQuote').addEventListener('click', displayRandomQuote);
 
 function addQuote() {
     const textInput = document.getElementById('newQuoteText');
@@ -24,6 +24,7 @@ function addQuote() {
   if(text && category){
     const newQuote = {text , category};
     quotes.push(newQuote);
+    displayRandomQuote();
 
     alert ('Quote added! ');
     textInput.value = '';
