@@ -14,12 +14,21 @@ function showRandomQuote() {
 
 document.getElementById('newQuote').addEventListener('click', showRandomQuote);
 
-function addQuate (){
+function addQuote() {
     const textInput = document.getElementById('newQuoteText');
     const categoryInput = document.getElementById('newQuoteCategory');
 
-    const text = textInput.Value.trim();
+    const text = textInput.value.trim();
     const category = categoryInput.value.trim();
     
-    if
+  if(text && category){
+    const newQuote = {text , category};
+    quotes.push(newQuote);
+
+    alert ('Quote added! ');
+    textInput.value = '';
+    categoryInput.value = '';
+  } else {
+    alert("please fill in both fields. ")
+  }
 }
