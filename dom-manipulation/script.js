@@ -1,9 +1,11 @@
-loadQuotes()
+
 let quotes = [
   { text: "The best way to get started is to quit talking and begin doing.", category: "motivation" },
   { text: "Life is what happens when you're busy making other plans.", category: "life" },
   { text: "Do what you can, with what you have, where you are.", category: "inspiration" }
 ];
+
+loadQuotes();
 
 function showRandomQuote()  {
     const randomIndex = Math.floor(Math.random() * quotes.length);
@@ -50,7 +52,7 @@ function loadQuotes(){
 }
 
 function importFromJsonFile(event) {
-  const fileReader = new fileReader();
+  const fileReader = new FileReader();
   fileReader.onload = function (event){
       const importedQuotes = JSON.parse(event.target.result);
       quotes.push(...importedQuotes);
