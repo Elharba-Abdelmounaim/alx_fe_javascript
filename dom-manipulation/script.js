@@ -6,6 +6,8 @@ let quotes = [
 ];
 
 loadQuotes();
+populateCategories();
+filterQuotes()
 
 function showRandomQuote()  {
     const randomIndex = Math.floor(Math.random() * quotes.length);
@@ -60,4 +62,40 @@ function importFromJsonFile(event) {
       alert('Quotes imported successfully!');
   };
   fileReader.readAsText(event.target.files[0]);
+}
+
+function  populateCategories() {
+  const categoryFilter = document.getElementById('categoryFilter');
+
+  const categories = [...new Set(quotes.map(q => q.category))];
+
+  categoryFilter.innerHTML = '<option value="all">All Categories</option>';
+
+  categories.forEach(category => {
+    const option = document.createElement('option')
+    option.value = category;
+    option.textContent = category.charAt(0).toUpperCase() + category.slice(1);
+    categoryFilter.appendChild(option)
+  });
+
+  const savedCategory = localStorage.getItem('selectedCategory');
+  if (savedCategory){
+    categoryFilter.value = savedCategory
+  }
+}
+
+function filterQuotes() {
+  const selectedCategory = document.getElementById('categoryFilter').value
+  localStorage.setItem('selectedCategory', selectedCategory);
+
+  let filterQuotes;
+
+  if (selectedCategory === "all"){
+    filterQuotes = quotes;
+  } else {
+    filterQuotes = quotes.filter(q => q.category === selectedCategory);
+  }
+  const q = filterQuotes[0];
+  quoteDisplay.innerHTML = `"${q.text}" — ${q.category}`;
+
 }
